@@ -20,7 +20,7 @@ Conventions
 - Keep components small and focused
 - Favor explicit types on public module boundaries
 
-Milestone 0 — Initialize project scaffold
+## Milestone 0 — Initialize project scaffold
 - Goal: Create a React + TS app with Vite in ./frontend and run it locally.
 - Concepts:
   - Vite dev server, HMR
@@ -35,7 +35,7 @@ Milestone 0 — Initialize project scaffold
 - Deliverable:
   - Running app at http://localhost:5173 with the Vite/React starter page
 
-Milestone 1 — Configure Pages deployment (gh-pages)
+## Milestone 1 — Configure Pages deployment (gh-pages)
 - Goal: Prepare the project for GitHub Pages deployment.
 - Concepts:
   - Vite base path for subpath deployments
@@ -53,7 +53,7 @@ Milestone 1 — Configure Pages deployment (gh-pages)
 - Deliverable:
   - Dist folder builds successfully; deploy script ready to push when desired
 
-Milestone 2 — Domain modeling
+## Milestone 2 — Domain modeling
 - Goal: Define the core types for Ingredients and Recipes.
 - Concepts:
   - Interfaces vs type aliases
@@ -73,7 +73,7 @@ Milestone 2 — Domain modeling
 - Deliverable:
   - Centralized, reusable types with clear relationships
 
-Milestone 3 — Local storage helpers + hook
+## Milestone 3 — Local storage helpers + hook
 - Goal: Read/write arrays of Ingredient and Recipe from localStorage.
 - Concepts:
   - JSON serialization with defensive parsing
@@ -95,7 +95,7 @@ Milestone 3 — Local storage helpers + hook
 - Deliverable:
   - Storage helpers and a reusable hook, unit-tested later if desired
 
-Milestone 4 — Ingredients: Add/List/Delete (first UI)
+## Milestone 4 — Ingredients: Add/List/Delete (first UI)
 - Goal: Implement CRUD basics for Ingredients, except edit.
 - Concepts:
   - Controlled inputs, form handling
@@ -114,7 +114,7 @@ Milestone 4 — Ingredients: Add/List/Delete (first UI)
 - Deliverable:
   - Ingredient list that persists via localStorage
 
-Milestone 5 — Ingredients: Edit + polish
+## Milestone 5 — Ingredients: Edit + polish
 - Goal: Add update capability and basic UX polish.
 - Concepts:
   - Conditional rendering (edit mode)
@@ -126,7 +126,7 @@ Milestone 5 — Ingredients: Edit + polish
 - Deliverable:
   - Full CRUD for Ingredients with simple, clean UI
 
-Milestone 6 — Recipes: Create
+## Milestone 6 — Recipes: Create
 - Goal: Create recipes by referencing existing ingredients.
 - Concepts:
   - Cross-entity references
@@ -144,7 +144,7 @@ Milestone 6 — Recipes: Create
 - Deliverable:
   - Ability to create and view recipes linked to ingredients
 
-Milestone 7 — Recipes: Delete/Edit + polish
+## Milestone 7 — Recipes: Delete/Edit + polish
 - Goal: Manage lifecycle of recipes with basic UX.
 - Concepts:
   - Editing nested arrays
@@ -156,7 +156,7 @@ Milestone 7 — Recipes: Delete/Edit + polish
 - Deliverable:
   - Full CRUD for Recipes with simple navigation patterns
 
-Milestone 8 — Optional quality-of-life features
+## Milestone 8 — Optional quality-of-life features
 - Goal: Add small features that improve usability and resilience.
 - Options:
   - Import/export JSON for backup
@@ -166,7 +166,7 @@ Milestone 8 — Optional quality-of-life features
   - React Router with two routes: /ingredients and /recipes
   - Context + useReducer if state grows complex
 
-Milestone 9 — Deploy to GitHub Pages
+## Milestone 9 — Deploy to GitHub Pages
 - Goal: Publish the app via gh-pages.
 - Concepts:
   - Local build and publish to gh-pages branch
