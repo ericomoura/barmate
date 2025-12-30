@@ -56,44 +56,53 @@ Conventions
 ## Milestone 2 — Domain modeling
 - Goal: Define the core types for Ingredients and Recipes.
 - Concepts:
-  - Interfaces vs type aliases
-  - Ids as strings
-  - Optional fields
+  - Interfaces for object contracts
+  - Readonly ids to prevent mutation
 - Tasks:
   1) Create src/types.ts with:
-     - export type IngredientId = string
-     - export interface Ingredient { id: IngredientId; name: string; notes?: string }
-     - export type RecipeId = string
-     - export interface Recipe {
-         id: RecipeId;
-         name: string;
-         items: Array<{ ingredientId: IngredientId; amount?: string }>;
-         steps?: string;
-       }
+     - export interface Ingredient { readonly id: string; name: string }
+     - export interface RecipeItem { ingredientId: string; amount?: string }
+     - export interface Recipe { readonly id: string; name: string; items: RecipeItem[] }
 - Deliverable:
-  - Centralized, reusable types with clear relationships
+  - Centralized, reusable types matching the app's decisions
 
 ## Milestone 3 — Local storage helpers + hook
-- Goal: Read/write arrays of Ingredient and Recipe from localStorage.
+- Goal: Persist arrays of Ingredient and Recipe to localStorage with a small API and a generic hook.
 - Concepts:
   - JSON serialization with defensive parsing
-  - Encapsulating persistence behind a small API
-  - Custom React hook to persist state
+  - Encapsulating persistence behind helpers
+  - Generic hook for reusable state persistence
 - Tasks:
-  1) Create src/storage/localStorage.ts:
+  1) Create src/storage/localStorage.ts
      - Keys:
-       - const KEYS = { ingredients: 'barmate.ingredients', recipes: 'barmate.recipes' }
-     - Functions:
-       - loadIngredients(): Ingredient[]
-       - saveIngredients(list: Ingredient[]): void
-       - loadRecipes(): Recipe[]
-       - saveRecipes(list: Recipe[]): void
-     - Each load uses try/catch; invalid JSON returns [].
-  2) Create src/hooks/useLocalStorage.ts:
-     - function useLocalStorage<T>(key: string, initial: T): [T, (next: T) => void]
-     - Sync to localStorage inside a useEffect whenever state changes
+       - export const KEYS = { ingredients: 'barmate.ingredients', recipes: 'barmate.recipes' }
+     - Helpers:
+       - function loadArray<T>(key: string): T[] {
+           try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) as T[] : []; }
+           catch { return []; }
+         }
+       - function saveArray<T>(key: string, list: T[]): void {
+           try { localStorage.setItem(key, JSON.stringify(list)); }
+           catch (e) { console.error('localStorage save failed', e); }
+         }
+     - API:
+       - export function loadIngredients(): Ingredient[] { return loadArray<Ingredient>(KEYS.ingredients); }
+       - export function saveIngredients(list: Ingredient[]): void { saveArray(KEYS.ingredients, list); }
+       - export function loadRecipes(): Recipe[] { return loadArray<Recipe>(KEYS.recipes); }
+       - export function saveRecipes(list: Recipe[]): void { saveArray(KEYS.recipes, list); }
+  2) Create src/hooks/useLocalStorage.ts
+     - Signature:
+       - export function useLocalStorage<T>(key: string, initial: T): [T, (next: T) => void]
+     - Outline:
+       - const [value, setValue] = useState<T>(() => { /* read from localStorage or use initial */ });
+       - useEffect(() => { /* persist value to localStorage with try/catch */ }, [key, value]);
+     - Return [value, setValue].
 - Deliverable:
-  - Storage helpers and a reusable hook, unit-tested later if desired
+  - Working helpers and a generic hook; components can use them without duplicating JSON or try/catch logic.
+- Notes:
+  - Keep id generation in UI logic (e.g., when adding entities).
+  - Amount remains string by design (free-form inputs like "dash", "1/2 oz" supported).
+  - Add clear/export/import helpers later if desired.
 
 ## Milestone 4 — Ingredients: Add/List/Delete (first UI)
 - Goal: Implement CRUD basics for Ingredients, except edit.
