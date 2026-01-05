@@ -1,40 +1,52 @@
 import './App.css'
-import { useLocalStorage } from './hooks/useLocalStorage'
-import type { Ingredient } from './types'
-import { KEYS } from './storage/localStorage'
 import { IngredientForm } from './components/IngredientForm'
 import { IngredientList } from './components/IngredientList'
+import { RecipeForm } from './components/RecipeForm'
+import { RecipeList } from './components/RecipeList'
+import { useLocalStorage } from './hooks/useLocalStorage'
+import { KEYS } from './storage/localStorage'
+import type { Ingredient, Recipe, RecipeItem } from './types'
 
 function App() {
-  const [ingredients, setIngredients] = useLocalStorage<Ingredient[]>(KEYS.ingredients, []);
+    const [ingredients, setIngredients] = useLocalStorage<Ingredient[]>(KEYS.ingredients, []);
+    const [recipes, setRecipes] = useLocalStorage<Recipe[]>(KEYS.recipes, []);
 
-  function addIngredient(name: string) {
-    setIngredients((prev) => [{ id: crypto.randomUUID(), name }, ...prev]);
-  }
+    function addIngredient(name: string) {
+        setIngredients((prev) => [{ id: crypto.randomUUID(), name }, ...prev]);
+    }
+    function deleteIngredient(id: string) {
+        setIngredients((prev) => prev.filter((i) => i.id !== id));
+    }
+    function editIngredient(id: string, nextName: string) {
+        const trimmed = nextName.trim();
+        if (!trimmed) return;
+        setIngredients(prev =>
+            prev.map(i => (i.id === id ? { ...i, name: trimmed } : i))
+        );
+    }
 
-  function deleteIngredient(id: string) {
-    setIngredients((prev) => prev.filter((i) => i.id !== id));
-  }
-
-  function editIngredient(id: string, nextName: string) {
-  const trimmed = nextName.trim();
-  if (!trimmed) return;
-  setIngredients(prev =>
-    prev.map(i => (i.id === id ? { ...i, name: trimmed } : i))
-  );
-}
+    function addRecipe(name: string, items: RecipeItem[]) {
+        const trimmed = name.trim();
+        if (!trimmed || items.length === 0) return;
+        setRecipes(prev => [
+            { id: crypto.randomUUID(), name: trimmed, items },
+            ...prev,
+        ]);
+    }
 
 
-  return (
-    <main style={{ padding: 16 }}>
-      <h1>Barmate</h1>
-      <IngredientForm onAdd={addIngredient} />
-      <IngredientList 
-        items = {ingredients} 
-        onDelete = {deleteIngredient}
-        onEdit = {editIngredient} />
-    </main>
-  );
+    return (
+        <main style={{ padding: 16 }}>
+            <h1>Barmate</h1>
+            <IngredientForm onAdd={addIngredient} />
+            <IngredientList
+                items={ingredients}
+                onDelete={deleteIngredient}
+                onEdit={editIngredient} />
+            <RecipeForm ingredients={ingredients} onAdd={({ name, items }) => addRecipe(name, items)}/>
+            <RecipeList items={recipes} ingredients={ingredients}/>
+        </main>
+    );
 }
 
 export default App
