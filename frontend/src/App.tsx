@@ -16,11 +16,23 @@ function App() {
     setIngredients((prev) => prev.filter((i) => i.id !== id));
   }
 
+  function editIngredient(id: string, nextName: string) {
+  const trimmed = nextName.trim();
+  if (!trimmed) return;
+  setIngredients(prev =>
+    prev.map(i => (i.id === id ? { ...i, name: trimmed } : i))
+  );
+}
+
+
   return (
     <main style={{ padding: 16 }}>
       <h1>Barmate</h1>
       <IngredientForm onAdd={addIngredient} />
-      <IngredientList items={ingredients} onDelete={deleteIngredient} />
+      <IngredientList 
+        items = {ingredients} 
+        onDelete = {deleteIngredient}
+        onEdit = {editIngredient} />
     </main>
   );
 }
