@@ -268,18 +268,3 @@ Conventions
   3) Open the GitHub Pages URL to confirm assets load (base `/barmate/` is correct)
 - **Deliverable**:
   - Live URL serving the SPA
-
-## Appendix — Notes and tips
-- **Simple id helper** (optional):
-  ```ts
-  export function genId(prefix = ''): string {
-    const core =
-      typeof crypto?.randomUUID === 'function'
-        ? crypto.randomUUID()
-        : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
-    return prefix ? `${prefix}_${core}` : core;
-  }
-  ```
-- Avoid premature abstraction; refactor when duplication becomes clear
-- Keep types strict around persistence boundaries
-- Use memoization (`useMemo`) only after identifying real performance issues
