@@ -47,7 +47,7 @@ export function RecipeForm({ ingredients, onAdd }: RecipeFormProps) {
         <button type="submit" disabled={!canSubmit}>Add</button>
       </div>
 
-      <fieldset style={{ margin: 12 }}>
+      <fieldset style={{ margin: 12, borderColor: 'white', borderRadius: 4 }}>
         <legend>Select ingredients</legend>
         <ul style={{padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: '8px 16px'}}>
           {ingredients.map(ing => (
