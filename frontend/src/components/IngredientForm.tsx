@@ -8,25 +8,18 @@ export function IngredientForm({
     onAdd,
 }: IngredientFormProps) {
     const [name, setName] = useState<string>('');
-    const [error, setError] = useState<string | null>(null);
-
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setName(e.target.value);
-        if (error) setError(null);
-    }
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        
         const trimmed = name.trim();
-
-        if (!trimmed) {
-            setError('Please enter a name.');
-            return;
-        }
-
+        if (!trimmed) return;
         onAdd(trimmed);
+
         setName('');
     }
+
+    const canSubmit = name.trim().length > 0;
 
     return (
         <form onSubmit={handleSubmit}>
@@ -36,15 +29,10 @@ export function IngredientForm({
                     id="ingredient-name"
                     type="text"
                     value={name}
-                    onChange={handleChange}
+                    onChange={e => setName(e.target.value)}
                 />
-                <button type="submit" >Add</button>
+                <button type="submit" disabled={!canSubmit}>Add</button>
             </div>
-            {error && (
-                <div id="ingredient-name-error" role="alert" style={{ color: 'tomato' }}>
-                    {error}
-                </div>
-            )}
         </form>
     );
 }
