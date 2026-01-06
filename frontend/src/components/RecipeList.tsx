@@ -20,7 +20,7 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
       {sortedRecipes.length === 0 ? (
         <p style={{ color: '#888' }}>No recipes available.</p>
       ) : (
-        <ul style={{listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: '8px 16px'}}>
+        <ul style={{listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: 8}}>
           {sortedRecipes.map(recipe => {
             return (
               <RecipeListItem

@@ -42,7 +42,6 @@ export function RecipeForm({ ingredients, onAdd }: RecipeFormProps) {
           type="text"
           value={name}
           onChange={e => setName(e.target.value)}
-          autoFocus={true}
         />
         <button type="submit" disabled={!canSubmit}>Add</button>
       </div>
