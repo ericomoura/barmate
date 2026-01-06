@@ -12,29 +12,34 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
   const [editName, setEditName] = useState<string>('');
 
   function startEdit(ing: Ingredient) {
-      setEditingId(ing.id);
-      setEditName(ing.name);
+    setEditingId(ing.id);
+    setEditName(ing.name);
   }
   function cancelEdit() {
-      setEditingId(null);
-      setEditName('');
+    setEditingId(null);
+    setEditName('');
   }
   function saveEdit() {
-      const trimmed = editName.trim();
-      if (!trimmed) return;
-      onEdit(editingId!, trimmed);
-      setEditingId(null);
-      setEditName('');
+    const trimmed = editName.trim();
+    if (!trimmed) return;
+    onEdit(editingId!, trimmed);
+    setEditingId(null);
+    setEditName('');
   }
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-      if (e.key === 'Enter') saveEdit();
-      if (e.key === 'Escape') cancelEdit();
+    if (e.key === 'Enter') saveEdit();
+    if (e.key === 'Escape') cancelEdit();
   }
 
 
 
   return (
-    <li key={ing.id} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+    <li key={ing.id} style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      marginBottom: '4px'
+    }}>
       {editingId === ing.id ? (
         <>
           <input
@@ -42,7 +47,8 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
             value={editName}
             onChange={e => setEditName(e.target.value)}
             onKeyDown={handleKeyDown}
-            autoFocus={true}
+            style={{ flex: 1 }}
+            autoFocus
           />
           <button type="button" onClick={saveEdit} disabled={!editName.trim()}>Save</button>
           <button type="button" onClick={cancelEdit}>Cancel</button>
@@ -51,7 +57,7 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
         <>
           <span style={{ flex: 1 }}>{ing.name}</span>
           <button type="button" onClick={() => startEdit(ing)}>Edit</button>
-          <button type="button" onClick={() => onDelete(ing.id)} aria-label={`Delete ${ing.name}`}>Delete</button>
+          <button type="button" onClick={() => onDelete(ing.id)}>Delete</button>
         </>
       )}
     </li>

@@ -11,24 +11,27 @@ export function IngredientList({ items, onDelete, onEdit }: IngredientListProps)
   const sorted = [...items].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
-    <section>
+    <section style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h2 id="ingredients-heading">Ingredients</h2>
-      {sorted.length === 0 ?
-        (
-          <p style={{ color: '#888' }}>No ingredients yet. Add your first one above.</p>
-        )
-        :
-        (
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {sorted.map(ingredient => (
-              <IngredientListItem
-                ingredient={ingredient}
-                onDelete={onDelete}
-                onEdit={onEdit} />
-            ))}
-          </ul>
-        )
-      }
+      {sorted.length === 0 ? (
+        <p style={{ color: '#888' }}>No ingredients yet. Add one above.</p>
+      ) : (
+        <ul style={{
+          listStyle: 'none',
+          padding: 0,
+          margin: 0,
+          width: '100%',
+          maxWidth: '400px'
+        }}>
+          {sorted.map(ingredient => (
+            <IngredientListItem
+              ingredient={ingredient}
+              onDelete={onDelete}
+              onEdit={onEdit}
+            />
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
