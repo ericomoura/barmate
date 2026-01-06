@@ -44,7 +44,7 @@ export function RecipeForm({ ingredients, onAdd }: RecipeFormProps) {
           onChange={e => setName(e.target.value)}
           autoFocus={true}
         />
-        <button type="submit" disabled={!canSubmit}>Add recipe</button>
+        <button type="submit" disabled={!canSubmit}>Add</button>
       </div>
 
       <fieldset style={{ marginTop: 12 }}>
