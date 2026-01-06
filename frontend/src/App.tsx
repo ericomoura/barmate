@@ -44,22 +44,35 @@ function App() {
     );
   }
 
+  
 
   return (
-    <main style={{ padding: 16 }}>
-      <h1>Barmate</h1>
-      <IngredientForm onAdd={addIngredient} />
-      <IngredientList
-        items={ingredients}
-        onDelete={deleteIngredient}
-        onEdit={editIngredient} />
-      <RecipeForm ingredients={ingredients} onAdd={({ name, items }) => addRecipe(name, items)} />
-      <RecipeList
-        items={recipes}
-        ingredients={ingredients}
-        onDelete={deleteRecipe}
-        onEdit={editRecipe} />
-    </main>
+    <>
+      <header style={{ top: 0 , left: 0, right: 0}}>
+        <h1>Barmate</h1>
+      </header>
+
+      <main>
+        <div style={{ display: 'flex', gap: 16}}>
+          <section style={{display: 'flex', flexDirection: 'column'}}>
+            <IngredientForm onAdd={addIngredient} />
+            <IngredientList
+              items={ingredients}
+              onDelete={deleteIngredient}
+              onEdit={editIngredient} />
+          </section>
+          <div style={{ borderLeft: '1px solid'}} />
+          <section>
+            <RecipeForm ingredients={ingredients} onAdd={({ name, items }) => addRecipe(name, items)} />
+            <RecipeList
+              items={recipes}
+              ingredients={ingredients}
+              onDelete={deleteRecipe}
+              onEdit={editRecipe} />
+          </section>
+        </div>
+      </main>
+    </>
   );
 }
 
