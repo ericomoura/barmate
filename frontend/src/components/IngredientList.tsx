@@ -13,11 +13,11 @@ export function IngredientList({ items, onDelete, onEdit }: IngredientListProps)
   return (
     <section style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h2 id="ingredients-heading">Ingredients</h2>
+      
       {sorted.length === 0 ? (
         <p style={{ color: '#888' }}>No ingredients yet. Add one above.</p>
       ) : (
         <ul style={{
-          listStyle: 'none',
           padding: 0,
           margin: 0,
           width: '100%',
