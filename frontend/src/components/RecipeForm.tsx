@@ -35,7 +35,7 @@ export function RecipeForm({ ingredients, onAdd }: RecipeFormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8,  justifyContent: 'center' }}>
         <label>Recipe name:</label>
         <input
           id="recipe-name"
@@ -47,11 +47,11 @@ export function RecipeForm({ ingredients, onAdd }: RecipeFormProps) {
         <button type="submit" disabled={!canSubmit}>Add</button>
       </div>
 
-      <fieldset style={{ marginTop: 12 }}>
+      <fieldset style={{ margin: 12 }}>
         <legend>Select ingredients</legend>
-        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+        <ul style={{padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: '8px 16px'}}>
           {ingredients.map(ing => (
-            <li key={ing.id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0' }}>
+            <li key={ing.id} style={{ display: 'flex', minWidth: 'fit-content'}}>
               <label>
                 <input
                   type="checkbox"
