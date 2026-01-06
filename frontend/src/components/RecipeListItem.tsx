@@ -53,7 +53,7 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
   );
 
   return (
-    <li key={recipe.id} style={{ padding: '10px 0', borderBottom: '1px solid #222' }}>
+    <li key={recipe.id}>
       {isEditing ? (
         <div style={{border: 'solid white 1px', margin: 2, padding: 8, borderRadius: 8 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -63,6 +63,7 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
               type="text"
               value={draftName}
               onChange={e => setDraftName(e.target.value)}
+              autoFocus
             />
           </div>
 
@@ -137,7 +138,7 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
             </ul>
           )}
 
-          <div style={{ marginTop: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
             <button type="button" onClick={() => startEdit(recipe)}>Edit</button>
             <button type="button" onClick={() => onDelete(recipe.id)}>Delete</button>
           </div>
