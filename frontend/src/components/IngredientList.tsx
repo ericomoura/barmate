@@ -12,8 +12,8 @@ export function IngredientList({ items, onDelete, onEdit }: IngredientListProps)
 
   return (
     <section style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <h2 id="ingredients-heading">Ingredients</h2>
-      
+      <h4 id="saved-ingredients-heading">Saved Ingredients</h4>
+
       {sorted.length === 0 ? (
         <p style={{ color: '#888' }}>No ingredients yet. Add one above.</p>
       ) : (

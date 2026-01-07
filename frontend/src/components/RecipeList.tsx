@@ -15,8 +15,8 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
 
   return (
     <section style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <h2 id="recipes-heading">Recipes</h2>
-
+      <h4 id="saved-recipes-heading">Saved Recipes</h4>
+      
       {sortedRecipes.length === 0 ? (
         <p style={{ color: '#888' }}>No recipes available.</p>
       ) : (
