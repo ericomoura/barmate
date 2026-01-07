@@ -52,8 +52,8 @@ function App() {
       </header>
 
       <main>
-        <div style={{ display: 'flex', width: '100vw' }}>
-          <section style={{ display: 'flex', flex: '1', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ display: 'flex', width: '100vw'}}>
+          <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: 64, paddingRight: 64}}>
             <h2 id="ingredients-heading">Ingredients</h2>
             <IngredientForm onAdd={addIngredient} />
             <IngredientList items={ingredients} onDelete={deleteIngredient} onEdit={editIngredient} />
@@ -61,7 +61,7 @@ function App() {
 
           <div style={{ borderLeft: '1px solid #ccc' }} />
           
-          <section style={{ display: 'flex', flex: '1', flexDirection: 'column', alignItems: 'center' }}>
+          <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <h2 id="recipes-heading">Recipes</h2>
             <RecipeForm ingredients={ingredients} onAdd={({ name, items }) => addRecipe(name, items)} />
             <RecipeList items={recipes} ingredients={ingredients} onDelete={deleteRecipe} onEdit={editRecipe} />

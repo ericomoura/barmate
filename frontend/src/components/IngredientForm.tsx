@@ -24,7 +24,7 @@ export function IngredientForm({
     return (
         <form onSubmit={handleSubmit} style={{ marginBottom: 24}}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <label>New ingredient: </label>
+                <label style={{minWidth: 'fit-content'}}>New ingredient: </label>
                 <input
                     id="ingredient-name"
                     type="text"
