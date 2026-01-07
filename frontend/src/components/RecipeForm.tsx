@@ -36,7 +36,7 @@ export function RecipeForm({ ingredients, onAdd }: RecipeFormProps) {
   return (
     <form onSubmit={handleSubmit}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8,  justifyContent: 'center' }}>
-        <label>Recipe name:</label>
+        <label>New recipe name:</label>
         <input
           id="recipe-name"
           type="text"

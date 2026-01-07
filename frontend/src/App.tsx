@@ -54,6 +54,7 @@ function App() {
       <main>
         <div style={{ display: 'flex', width: '100vw' }}>
           <section style={{ display: 'flex', flex: '1', flexDirection: 'column', alignItems: 'center' }}>
+            <h2 id="ingredients-heading">Ingredients</h2>
             <IngredientForm onAdd={addIngredient} />
             <IngredientList items={ingredients} onDelete={deleteIngredient} onEdit={editIngredient} />
           </section>
@@ -61,6 +62,7 @@ function App() {
           <div style={{ borderLeft: '1px solid #ccc' }} />
           
           <section style={{ display: 'flex', flex: '1', flexDirection: 'column', alignItems: 'center' }}>
+            <h2 id="recipes-heading">Recipes</h2>
             <RecipeForm ingredients={ingredients} onAdd={({ name, items }) => addRecipe(name, items)} />
             <RecipeList items={recipes} ingredients={ingredients} onDelete={deleteRecipe} onEdit={editRecipe} />
           </section>

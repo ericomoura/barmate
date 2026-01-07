@@ -22,9 +22,9 @@ export function IngredientForm({
     const canSubmit = name.trim().length > 0;
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ marginBottom: 24}}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <label>New Ingredient: </label>
+                <label>New ingredient: </label>
                 <input
                     id="ingredient-name"
                     type="text"
