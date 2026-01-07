@@ -38,7 +38,9 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
       display: 'flex',
       alignItems: 'center',
       gap: 8,
-      marginBottom: '4px'
+      marginBottom: 8,
+      paddingBottom: 8,
+      borderBottom: '1px solid gray'
     }}>
       {editingId === ing.id ? (
         <>
