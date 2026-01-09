@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './IngredientForm.module.css';
 
 interface IngredientFormProps {
     onAdd: (name: string) => void;
@@ -22,9 +23,9 @@ export function IngredientForm({
     const canSubmit = name.trim().length > 0;
 
     return (
-        <form onSubmit={handleSubmit} style={{ marginBottom: 24}}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <label style={{minWidth: 'fit-content'}}>New ingredient: </label>
+        <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.row}>
+                <label className={styles.label}>New ingredient: </label>
                 <input
                     id="ingredient-name"
                     type="text"

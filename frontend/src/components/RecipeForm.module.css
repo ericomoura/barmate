@@ -1,0 +1,25 @@
+.rowCenter {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+  justify-content: center;
+}
+
+.fieldset {
+  margin: var(--space-6);
+  border-color: white;
+  border-radius: var(--radius-1);
+}
+
+.chips {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-small) var(--gap-medium);
+}
+
+.chipItem {
+  display: flex;
+  min-width: fit-content;
+}

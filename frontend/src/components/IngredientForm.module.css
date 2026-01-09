@@ -1,0 +1,13 @@
+.form {
+  margin-bottom: var(--space-12);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+.label {
+  min-width: fit-content;
+}

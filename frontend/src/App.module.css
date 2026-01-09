@@ -1,0 +1,29 @@
+.header {
+  text-align: center;
+}
+
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+}
+
+.leftCol {
+  display: flex;
+  flex: 0;
+  flex-direction: column;
+  align-items: center;
+  padding-left: var(--space-32);
+  padding-right: var(--space-32);
+}
+
+.divider {
+  border-left: 1px solid var(--border-color);
+}
+
+.rightCol {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+}

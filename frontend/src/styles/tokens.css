@@ -1,0 +1,27 @@
+:root {
+  /* Colors */
+  --border-color: #ccc;
+  --text-muted: #888;
+  --text-subtle: #aaa;
+  
+  /* Spacing */
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 6px;
+  --space-4: 8px;
+  --space-6: 12px;
+  --space-8: 16px;
+  --space-12: 24px;
+  --space-16: 32px;
+  --space-20: 48px;
+  --space-32: 64px;
+  
+  /* Border radius */
+  --radius-1: 4px;
+  --radius-2: 8px;
+  
+  /* Layout spacing */
+  --gap-small: 8px;
+  --gap-medium: 16px;
+  --padding-list: 20px;
+}
