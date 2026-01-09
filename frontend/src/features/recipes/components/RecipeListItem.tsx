@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { Ingredient, Recipe, RecipeItem } from "../types";
+import type { Ingredient, Recipe, RecipeItem } from "../../../types";
 import styles from "./RecipeListItem.module.css";
 
 interface RecipeListItemProps {
