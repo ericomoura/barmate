@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import type { Ingredient, Recipe, RecipeItem } from "../types";
+import styles from "./RecipeListItem.module.css";
 
 interface RecipeListItemProps {
   recipe: Recipe;
@@ -55,8 +56,8 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
   return (
     <li key={recipe.id}>
       {isEditing ? (
-        <div style={{border: 'solid white 1px', margin: 2, padding: 8, borderRadius: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div className={styles.card}>
+          <div className={styles.row}>
             <label>Name:</label>
             <input
               id={`rname-${recipe.id}`}
@@ -67,18 +68,18 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
             />
           </div>
 
-          <div style={{ marginTop: 8 }}>
-            <div style={{ fontWeight: 600, marginBottom: 4 }}>Ingredients</div>
+          <div className={styles.section}>
+            <div className={styles.title}>Ingredients</div>
             {draftItems.length === 0 ? (
-              <p style={{ color: '#888' }}>No items yet.</p>
+              <p className={styles.muted}>No items yet.</p>
             ) : (
-              <ul style={{ listStyle: 'disc', paddingLeft: 20, margin: 0 }}>
+              <ul className={styles.discList}>
                 {draftItems.map((it, idx) => {
                   const ing = ingredientById.get(it.ingredientId);
                   const label = ing ? ing.name : '(missing ingredient)';
                   return (
-                    <li key={`${recipe.id}-${it.ingredientId}-${idx}`} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ minWidth: 140 }}>{label}</span>
+                    <li key={`${recipe.id}-${it.ingredientId}-${idx}`} className={styles.ingredientRow}>
+                      <span className={styles.ingredientName}>{label}</span>
                       <button type="button" onClick={() => removeItem(idx)}>Remove</button>
                     </li>
                   );
@@ -87,7 +88,7 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
             )}
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
+          <div className={styles.controls}>
             <select
               value={newIngredientId}
               onChange={e => setNewIngredientId(e.target.value)}
@@ -104,7 +105,7 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+          <div className={styles.controlsMarginLarge}>
             <button
               type="button"
               onClick={saveEdit}
@@ -117,28 +118,28 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
           </div>
         </div>
       ) : (
-        <div style={{border: 'solid white 1px', margin: 2, padding: 8, borderRadius: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8}}>
-            <span style={{ fontWeight: 600 }}>{recipe.name}</span>
-            <span style={{ color: '#888' }}>({recipe.items.length} item{recipe.items.length === 1 ? '' : 's'})</span>
+        <div className={styles.card}>
+          <div className={styles.row}>
+            <span className={styles.recipeName}>{recipe.name}</span>
+            <span className={styles.muted}>({recipe.items.length} item{recipe.items.length === 1 ? '' : 's'})</span>
           </div>
 
           {recipe.items.length > 0 && (
-            <ul style={{ listStyle: 'disc', paddingLeft: 20, marginTop: 6 }}>
+            <ul className={styles.discListCompact}>
               {recipe.items.map((item, idx) => {
                 const ing = ingredientById.get(item.ingredientId);
                 const label = ing ? ing.name : '(missing ingredient)';
                 return (
                   <li key={`${recipe.id}-${item.ingredientId}-${idx}`}>
                     <span>{label}</span>
-                    {item.amount && <span style={{ color: '#aaa' }}> — {item.amount}</span>}
+                    {item.amount && <span className={styles.subtle}> — {item.amount}</span>}
                   </li>
                 );
               })}
             </ul>
           )}
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
+          <div className={styles.controls}>
             <button type="button" onClick={() => startEdit(recipe)}>Edit</button>
             <button type="button" onClick={() => onDelete(recipe.id)}>Delete</button>
           </div>

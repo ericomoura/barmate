@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Ingredient, RecipeItem } from '../types';
+import styles from './RecipeForm.module.css';
 
 interface RecipeFormProps {
   ingredients: Ingredient[];
@@ -35,7 +36,7 @@ export function RecipeForm({ ingredients, onAdd }: RecipeFormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8,  justifyContent: 'center' }}>
+      <div className={styles.rowCenter}>
         <label>New recipe name:</label>
         <input
           id="recipe-name"
@@ -46,11 +47,11 @@ export function RecipeForm({ ingredients, onAdd }: RecipeFormProps) {
         <button type="submit" disabled={!canSubmit}>Add</button>
       </div>
 
-      <fieldset style={{ margin: 12, borderColor: 'white', borderRadius: 4 }}>
+      <fieldset className={styles.fieldset}>
         <legend>Select ingredients</legend>
-        <ul style={{padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: '8px 16px'}}>
+        <ul className={styles.chips}>
           {ingredients.map(ing => (
-            <li key={ing.id} style={{ display: 'flex', minWidth: 'fit-content'}}>
+            <li key={ing.id} className={styles.chipItem}>
               <label>
                 <input
                   type="checkbox"

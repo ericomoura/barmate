@@ -1,0 +1,67 @@
+.card {
+  border: solid white 1px;
+  margin: var(--space-1);
+  padding: var(--space-4);
+  border-radius: var(--radius-2);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+.section {
+  margin-top: var(--space-4);
+}
+
+.title {
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.recipeName {
+  font-weight: 600;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.subtle {
+  color: var(--text-subtle);
+}
+
+.discList {
+  list-style: disc;
+  padding-left: var(--padding-list);
+  margin: 0;
+}
+
+.discListCompact {
+  list-style: disc;
+  padding-left: var(--padding-list);
+  margin-top: var(--space-3);
+}
+
+.ingredientRow {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+.ingredientName {
+  min-width: 140px;
+}
+
+.controls {
+  display: flex;
+  gap: var(--gap-small);
+  margin-top: var(--space-4);
+}
+
+.controlsMarginLarge {
+  display: flex;
+  gap: var(--gap-small);
+  margin-top: 10px;
+}

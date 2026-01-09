@@ -1,0 +1,16 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid gray;
+}
+
+.input {
+  flex: 1;
+}
+
+.name {
+  flex: 1;
+}

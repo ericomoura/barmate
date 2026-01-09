@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Ingredient } from "../types";
+import styles from "./IngredientListItem.module.css";
 
 interface IngredientListItemProps {
   ingredient: Ingredient;
@@ -34,14 +35,7 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
 
 
   return (
-    <li key={ing.id} style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: 8,
-      marginBottom: 8,
-      paddingBottom: 8,
-      borderBottom: '1px solid gray'
-    }}>
+    <li key={ing.id} className={styles.row}>
       {editingId === ing.id ? (
         <>
           <input
@@ -49,7 +43,7 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
             value={editName}
             onChange={e => setEditName(e.target.value)}
             onKeyDown={handleKeyDown}
-            style={{ flex: 1 }}
+            className={styles.input}
             autoFocus
           />
           <button type="button" onClick={saveEdit} disabled={!editName.trim()}>Save</button>
@@ -57,7 +51,7 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
         </>
       ) : (
         <>
-          <span style={{ flex: 1 }}>{ing.name}</span>
+          <span className={styles.name}>{ing.name}</span>
           <button type="button" onClick={() => startEdit(ing)}>Edit</button>
           <button type="button" onClick={() => onDelete(ing.id)}>Delete</button>
         </>

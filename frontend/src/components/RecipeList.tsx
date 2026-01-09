@@ -1,5 +1,6 @@
 import type { Ingredient, Recipe, RecipeItem } from '../types';
 import { RecipeListItem } from './RecipeListItem';
+import styles from './RecipeList.module.css';
 
 interface RecipeListProps {
   items: Recipe[];
@@ -14,16 +15,17 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
 
 
   return (
-    <section style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <section className={styles.section}>
       <h4 id="saved-recipes-heading">Saved Recipes</h4>
       
       {sortedRecipes.length === 0 ? (
-        <p style={{ color: '#888' }}>No recipes available.</p>
+        <p className={styles.empty}>No recipes available.</p>
       ) : (
-        <ul style={{listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: 8}}>
+        <ul className={styles.list}>
           {sortedRecipes.map(recipe => {
             return (
               <RecipeListItem
+                key={recipe.id}
                 recipe={recipe}
                 ingredients={ingredients}
                 onDelete={onDelete}

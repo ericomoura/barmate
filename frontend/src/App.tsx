@@ -5,6 +5,7 @@ import { RecipeList } from './components/RecipeList'
 import { useLocalStorage } from './hooks/useLocalStorage'
 import { KEYS } from './storage/localStorage'
 import type { Ingredient, Recipe, RecipeItem } from './types'
+import styles from './App.module.css'
 
 function App() {
   const [ingredients, setIngredients] = useLocalStorage<Ingredient[]>(KEYS.ingredients, []);
@@ -47,21 +48,21 @@ function App() {
 
   return (
     <>
-      <header style={{ textAlign: 'center' }}>
+      <header className={styles.header}>
         <h1>Barmate</h1>
       </header>
 
       <main>
-        <div style={{ display: 'flex', flexWrap: 'wrap', width: '100vw'}}>
-          <section style={{ display: 'flex', flex: 0, flexDirection: 'column', alignItems: 'center', paddingLeft: 64, paddingRight: 64}}>
+        <div className={styles.layout}>
+          <section className={styles.leftCol}>
             <h2 id="ingredients-heading">Ingredients</h2>
             <IngredientForm onAdd={addIngredient} />
             <IngredientList items={ingredients} onDelete={deleteIngredient} onEdit={editIngredient} />
           </section>
 
-          <div style={{ borderLeft: '1px solid #ccc' }} />
+          <div className={styles.divider} />
           
-          <section style={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center'}}>
+          <section className={styles.rightCol}>
             <h2 id="recipes-heading">Recipes</h2>
             <RecipeForm ingredients={ingredients} onAdd={({ name, items }) => addRecipe(name, items)} />
             <RecipeList items={recipes} ingredients={ingredients} onDelete={deleteRecipe} onEdit={editRecipe} />
