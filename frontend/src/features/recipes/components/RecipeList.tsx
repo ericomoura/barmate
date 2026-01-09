@@ -1,4 +1,4 @@
-import type { Ingredient, Recipe, RecipeItem } from '../types';
+import type { Ingredient, Recipe, RecipeItem } from '../../../types';
 import { RecipeListItem } from './RecipeListItem';
 import styles from './RecipeList.module.css';
 

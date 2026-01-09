@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Ingredient, RecipeItem } from '../types';
+import type { Ingredient, RecipeItem } from '../../../types';
 import styles from './RecipeForm.module.css';
 
 interface RecipeFormProps {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Ingredient } from "../types";
+import type { Ingredient } from "../../../types";
 import styles from "./IngredientListItem.module.css";
 
 interface IngredientListItemProps {
