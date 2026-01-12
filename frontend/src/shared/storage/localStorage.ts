@@ -1,4 +1,4 @@
-import type { Ingredient, Recipe } from '../types';
+import type { Ingredient, Recipe } from '../../types';
 
 export const KEYS = {
   ingredients: 'barmate.ingredients',
