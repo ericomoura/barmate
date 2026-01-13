@@ -85,6 +85,7 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
                     <li key={`${recipe.id}-${it.ingredientId}-${idx}`} className={styles.ingredientRow}>
                       <span className={styles.ingredientName}>{label}</span>
                       <input
+                        className={styles.ingAmountInput}
                         type="number"
                         min="0"
                         value={it.amount ?? 0}

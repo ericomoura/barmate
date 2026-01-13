@@ -13,3 +13,7 @@ export interface Recipe {
     name: string;
     items: Array<RecipeItem>;
 }
+
+export interface RecipeListFilters {
+    inStock: boolean;
+}
