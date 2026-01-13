@@ -52,6 +52,7 @@
 
 .ingredientName {
   min-width: 140px;
+  flex: 1;
 }
 
 .controls {
@@ -64,4 +65,9 @@
   display: flex;
   gap: var(--gap-small);
   margin-top: 10px;
+}
+
+.ingAmountInput {
+  max-width: 5ch;
+  
 }
