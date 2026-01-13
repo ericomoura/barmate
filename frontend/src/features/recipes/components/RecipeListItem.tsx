@@ -76,7 +76,7 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
               <ul className={styles.discList}>
                 {draftItems.map((it, idx) => {
                   const ing = ingredientById.get(it.ingredientId);
-                  const label = ing ? ing.name : '(missing ingredient)';
+                  const label = ing ? ing.name : '(deleted ingredient)';
                   return (
                     <li key={`${recipe.id}-${it.ingredientId}-${idx}`} className={styles.ingredientRow}>
                       <span className={styles.ingredientName}>{label}</span>
@@ -128,7 +128,7 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
             <ul className={styles.discListCompact}>
               {recipe.items.map((item, idx) => {
                 const ing = ingredientById.get(item.ingredientId);
-                const label = ing ? ing.name : '(missing ingredient)';
+                const label = ing ? ing.name : '(deleted ingredient)';
                 return (
                   <li key={`${recipe.id}-${item.ingredientId}-${idx}`}>
                     <span>{label}</span>
