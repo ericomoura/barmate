@@ -9,10 +9,6 @@ interface IngredientListItemProps {
 }
 
 export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: IngredientListItemProps) {
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [editName, setEditName] = useState<string>('');
-  const [editAmount, setEditAmount] = useState<number>(0);
-
   function startEdit(ing: Ingredient) {
     setEditingId(ing.id);
     setEditName(ing.name);
@@ -26,7 +22,7 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
   function saveEdit() {
     const trimmed = editName.trim();
     if (!trimmed) return;
-
+    
     onEdit(editingId!, trimmed, editAmount|0);
     setEditingId(null);
     setEditName('');
@@ -36,6 +32,11 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
     if (e.key === 'Enter') saveEdit();
     if (e.key === 'Escape') cancelEdit();
   }
+
+
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editName, setEditName] = useState<string>('');
+  const [editAmount, setEditAmount] = useState<number>(0);
 
 
 

@@ -6,6 +6,7 @@ import { useLocalStorage } from './shared/hooks/useLocalStorage'
 import { KEYS } from './shared/storage/localStorage'
 import type { Ingredient, Recipe, RecipeItem } from './types'
 import styles from './App.module.css'
+import utils from './styles/utilities.module.css';
 
 function App() {
   const [ingredients, setIngredients] = useLocalStorage<Ingredient[]>(KEYS.ingredients, []);
@@ -60,7 +61,7 @@ function App() {
             <IngredientList items={ingredients} onDelete={deleteIngredient} onEdit={editIngredient} />
           </section>
 
-          <div className={styles.divider} />
+          <div className={utils.vDivider} />
           
           <section className={styles.rightCol}>
             <h2 id="recipes-heading">Recipes</h2>
