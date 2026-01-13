@@ -12,16 +12,16 @@ function App() {
   const [recipes, setRecipes] = useLocalStorage<Recipe[]>(KEYS.recipes, []);
 
   function addIngredient(name: string) {
-    setIngredients((prev) => [{ id: crypto.randomUUID(), name }, ...prev]);
+    setIngredients((prev) => [{ id: crypto.randomUUID(), name, amount: 0 }, ...prev]);
   }
   function deleteIngredient(id: string) {
     setIngredients((prev) => prev.filter((i) => i.id !== id));
   }
-  function editIngredient(id: string, nextName: string) {
+  function editIngredient(id: string, nextName: string, nextAmount: number) {
     const trimmed = nextName.trim();
     if (!trimmed) return;
     setIngredients(prev =>
-      prev.map(i => (i.id === id ? { ...i, name: trimmed } : i))
+      prev.map(i => (i.id === id ? { ...i, name: trimmed, amount: nextAmount } : i))
     );
   }
 

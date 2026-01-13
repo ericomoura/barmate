@@ -14,3 +14,24 @@
 .name {
   flex: 1;
 }
+
+.amount {
+  color: var(--text-muted);
+}
+
+.ingContainer {
+  display: flex;
+  flex-grow: 1;
+  align-items: center; 
+  justify-content: space-between;
+}
+
+.ingInfo {
+  display: flex; 
+  flex-direction: column;
+}
+
+.ingButtons {
+  display: flex;
+  gap: var(--gap-small);
+}

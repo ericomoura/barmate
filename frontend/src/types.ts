@@ -1,6 +1,7 @@
 export interface Ingredient {
     readonly id: string;
     name: string;
+    amount: number;
 }
 
 export interface RecipeItem {
