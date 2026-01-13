@@ -36,11 +36,15 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
   function removeItem(index: number) {
     setDraftItems(prev => prev.filter((_, i) => i !== index));
   }
+  function updateItemAmount(ingId: string, newAmount: number) {
+    if (newAmount < 0) return;
+    setDraftItems(prev => prev.map(it => it.ingredientId === ingId ? { ...it, amount: newAmount } : it));
+  }
   function addItem() {
     if (!newIngredientId) return;
     const exists = draftItems.some(i => i.ingredientId === newIngredientId);
     if (exists) return;
-    setDraftItems(prev => [...prev, { ingredientId: newIngredientId }]);
+    setDraftItems(prev => [...prev, { ingredientId: newIngredientId, amount: 0 }]);
     setNewIngredientId('');
   }
 
@@ -80,6 +84,12 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
                   return (
                     <li key={`${recipe.id}-${it.ingredientId}-${idx}`} className={styles.ingredientRow}>
                       <span className={styles.ingredientName}>{label}</span>
+                      <input
+                        type="number"
+                        min="0"
+                        value={it.amount ?? 0}
+                        onChange={e => updateItemAmount(it.ingredientId, e.target.valueAsNumber)}
+                      />
                       <button type="button" onClick={() => removeItem(idx)}>Remove</button>
                     </li>
                   );
@@ -129,12 +139,12 @@ export function RecipeListItem({ recipe, ingredients, onDelete, onEdit }: Recipe
               {recipe.items.map((item, idx) => {
                 const ing = ingredientById.get(item.ingredientId);
                 const label = ing ? ing.name : '(deleted ingredient)';
-                return (
-                  <li key={`${recipe.id}-${item.ingredientId}-${idx}`}>
-                    <span>{label}</span>
-                    {item.amount && <span className={styles.subtle}> — {item.amount}</span>}
-                  </li>
-                );
+                  return (
+                    <li key={`${recipe.id}-${item.ingredientId}-${idx}`}>
+                      <span>{label}</span>
+                      <span className={styles.subtle}> ({item.amount} oz.)</span>
+                    </li>
+                  );
               })}
             </ul>
           )}

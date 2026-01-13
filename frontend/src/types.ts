@@ -5,8 +5,8 @@ export interface Ingredient {
 }
 
 export interface RecipeItem {
-        ingredientId: string;
-        amount?: string;
+    ingredientId: string;
+    amount: number;
 }
 export interface Recipe {
     readonly id: string;

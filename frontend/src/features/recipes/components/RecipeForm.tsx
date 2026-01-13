@@ -24,7 +24,7 @@ export function RecipeForm({ ingredients, onAdd }: RecipeFormProps) {
       return;
     }
 
-    const items: RecipeItem[] = selectedIds.map(ingredientId => ({ ingredientId }));
+    const items: RecipeItem[] = selectedIds.map(ingredientId => ({ ingredientId, amount: 0 }));
 
     onAdd({ name: trimmed, items });
 
