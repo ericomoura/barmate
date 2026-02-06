@@ -53,14 +53,17 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
               className={styles.input}
               autoFocus
             />
-            <input
-              type="number"
-              value={editAmount}
-              onChange={e => setEditAmount(e.target.valueAsNumber)}
-              onKeyDown={handleKeyDown}
-              className={styles.input}
-              autoFocus
-            />
+            <div style={{display: 'flex', flexDirection: 'row', gap: 8}}>
+              <input
+                type="number"
+                value={editAmount}
+                onChange={e => setEditAmount(e.target.valueAsNumber)}
+                onKeyDown={handleKeyDown}
+                className={styles.input}
+                autoFocus
+              />
+              <label> oz.</label>
+            </div>
           </div>
 
           <div className={styles.ingButtons}>
