@@ -23,3 +23,18 @@
   display: flex;
   min-width: fit-content;
 }
+
+/* Mobile */
+@media (max-width: 600px) {
+  .rowCenter {
+    flex-wrap: nowrap;
+  }
+  
+  .rowCenter label {
+    font-size: 0.9rem;
+  }
+  
+  .fieldset {
+    margin: var(--space-4);
+  }
+}

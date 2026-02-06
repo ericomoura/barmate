@@ -26,3 +26,11 @@ button:hover {
   border-color: #646cff;
 }
 
+/* Mobile */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+}
+
