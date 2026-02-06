@@ -10,11 +10,8 @@
 
 /* Mobile */
 @media (max-width: 600px) {
-  .vDivider {
-    border-left: 0;
-    border-top: 1px solid var(--border-color);
-    width: 100%;
-    align-self: auto;
-    margin: var(--space-12) 0;
+  /* Hide vertical dividers in filter/sort rows on mobile */
+  div[class*="filterSortRow"] .vDivider {
+    display: none;
   }
 }
