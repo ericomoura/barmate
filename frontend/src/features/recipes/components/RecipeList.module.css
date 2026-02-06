@@ -27,3 +27,16 @@
   align-items: center;
   gap: var(--gap-small);
 }
+
+/* Mobile */
+@media (max-width: 600px) {
+  .filterSortRow {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .list {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -11,3 +11,15 @@
 .label {
   min-width: fit-content;
 }
+
+/* Mobile */
+@media (max-width: 600px) {
+  .row {
+    flex-wrap: nowrap;
+  }
+  
+  .label {
+    min-width: auto;
+    font-size: 0.9rem;
+  }
+}
