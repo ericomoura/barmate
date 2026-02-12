@@ -19,6 +19,8 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
       sorted = [...recipes].sort((a, b) => a.name.localeCompare(b.name));
     } else if (criteria === 'ingredients') {
       sorted = [...recipes].sort((a, b) => a.items.length - b.items.length);
+    } else if (criteria === 'random') {
+      sorted = [...recipes].sort(() => Math.random() - 0.5);
     }
 
     return ascending ? sorted : sorted.reverse();
@@ -57,6 +59,7 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
               onChange={e => setSortCriteria(e.target.value)}>
                 <option value="name">Name</option>
                 <option value="ingredients">Ingredients</option>
+                <option value="random">Random</option>
             </select>
             <button onClick={() => setSortAscending(!sortAscending)}>{sortAscending ? '↑' : '↓'}</button>
         </div>
