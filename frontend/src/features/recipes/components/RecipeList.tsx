@@ -98,7 +98,8 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
       
       {filteredSortedRecipes.length === 0 ? (
         <p className={styles.empty}>No recipes available.</p>
-      ) : (
+      ) : (<>
+        <label className={styles.empty}> Displaying {filteredSortedRecipes.length} recipes</label>
         <ul className={styles.list}>
           {filteredSortedRecipes.map(recipe => {
             return (
@@ -112,7 +113,7 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
             );
           })}
         </ul>
-      )}
+      </>)}
     </section>
   );
 }
