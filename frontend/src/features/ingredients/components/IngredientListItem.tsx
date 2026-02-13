@@ -65,8 +65,8 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
                 value={editCategory}
                 onChange={e => setEditCategory(e.target.value)}>
                   <option value="Other">Other</option>
-                  <option value="Mixer">Mixer</option>
                   <option value="Spirit">Spirit</option>
+                  <option value="Mixer">Mixer</option>
                   <option value="Fruit">Fruit</option>
               </select>
             </div>

@@ -26,16 +26,25 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
     return ascending ? sorted : sorted.reverse();
   }
   function filterRecipes(recipes: Recipe[], filters: RecipeListFilters): Recipe[] {
-    let filtered = recipes
-    .filter(recipe => {
-      if (filters.inStock) {
-        return recipe.items.every(item => {
-          const ingredient = ingredients.find(ing => ing.id === item.ingredientId);
-          return ingredient ? ingredient.amount >= item.amount : false;
-        })
-      }
-      return true;
-    })
+    let filtered = recipes.filter(recipe => {
+      return recipe.items.every(item => {
+        const ingredient = ingredients.find(ing => ing.id === item.ingredientId);
+
+        if (!ingredient) 
+          return false;
+
+        if (filters.inStockSpirit && ingredient.category === 'Spirit')
+          return ingredient.amount >= item.amount;
+        if (filters.inStockMixer && ingredient.category === 'Mixer')
+          return ingredient.amount >= item.amount;
+        if (filters.inStockFruit && ingredient.category === 'Fruit')
+          return ingredient.amount >= item.amount;
+        if (filters.inStockOther && ingredient.category === 'Other')
+          return ingredient.amount >= item.amount;
+
+        return true;
+      });
+    });
 
     return filtered;
   }
@@ -43,7 +52,7 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
 
   const [sortCriteria, setSortCriteria] = useState<string>('name');
   const [sortAscending, setSortAscending] = useState<boolean>(true);
-  const [filters, setFilters] = useState<RecipeListFilters>({ inStock: false });
+  const [filters, setFilters] = useState<RecipeListFilters>({ inStockSpirit: false, inStockMixer: false, inStockFruit: false, inStockOther: false });
   const filteredSortedRecipes = sortRecipes(filterRecipes(items, filters), sortCriteria, sortAscending);
   
   
@@ -67,11 +76,23 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
         <div className={utils.vDivider} />
 
         <div>
-          <label>Filter by: </label>
+          <label>In stock: </label>
           <label><input 
             type='checkbox'
-            checked={filters.inStock}
-            onChange={e => setFilters(prev => ({...prev, inStock: e.target.checked}))} />In stock</label>
+            checked={filters.inStockSpirit}
+            onChange={e => setFilters(prev => ({...prev, inStockSpirit: e.target.checked}))} />Spirit </label>
+          <label><input 
+            type='checkbox'
+            checked={filters.inStockMixer}
+            onChange={e => setFilters(prev => ({...prev, inStockMixer: e.target.checked}))} />Mixer </label>
+          <label><input
+            type='checkbox'
+            checked={filters.inStockFruit}
+            onChange={e => setFilters(prev => ({...prev, inStockFruit: e.target.checked}))} />Fruit </label>
+          <label><input 
+            type='checkbox'
+            checked={filters.inStockOther}
+            onChange={e => setFilters(prev => ({...prev, inStockOther: e.target.checked}))} />Other </label>
         </div>
       </div>
       

@@ -16,5 +16,8 @@ export interface Recipe {
 }
 
 export interface RecipeListFilters {
-    inStock: boolean;
+    inStockSpirit: boolean;
+    inStockMixer: boolean;
+    inStockFruit: boolean;
+    inStockOther: boolean;
 }
