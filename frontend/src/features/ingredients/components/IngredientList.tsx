@@ -5,7 +5,7 @@ import styles from './IngredientList.module.css';
 interface IngredientListProps {
   items: Ingredient[];
   onDelete: (id: string) => void;
-  onEdit: (id: string, name: string, amount: number) => void;
+  onEdit: (id: string, name: string, amount: number, category?: string) => void;
 }
 
 export function IngredientList({ items, onDelete, onEdit }: IngredientListProps) {

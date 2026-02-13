@@ -18,11 +18,11 @@ function App() {
   function deleteIngredient(id: string) {
     setIngredients((prev) => prev.filter((i) => i.id !== id));
   }
-  function editIngredient(id: string, nextName: string, nextAmount: number) {
+  function editIngredient(id: string, nextName: string, nextAmount: number, nextCategory?: string) {
     const trimmed = nextName.trim();
     if (!trimmed) return;
     setIngredients(prev =>
-      prev.map(i => (i.id === id ? { ...i, name: trimmed, amount: nextAmount } : i))
+      prev.map(i => (i.id === id ? { ...i, name: trimmed, amount: nextAmount, category: nextCategory || undefined } : i))
     );
   }
 

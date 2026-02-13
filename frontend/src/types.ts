@@ -2,6 +2,7 @@ export interface Ingredient {
     readonly id: string;
     name: string;
     amount: number;
+    category?: string;
 }
 
 export interface RecipeItem {
