@@ -78,7 +78,6 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
                 onChange={e => setEditAmount(e.target.valueAsNumber)}
                 onKeyDown={handleKeyDown}
                 className={styles.input}
-                autoFocus
               />
               <label> oz.</label>
             </div>
