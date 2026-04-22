@@ -25,7 +25,7 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
     const trimmed = editName.trim();
     if (!trimmed) return;
     
-    onEdit(editingId!, trimmed, editAmount|0, editCategory.trim() || undefined);
+    onEdit(editingId!, trimmed, editAmount || 0, editCategory.trim() || undefined);
     setEditingId(null);
     setEditName('');
     setEditAmount(0);
