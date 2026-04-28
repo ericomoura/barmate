@@ -1,6 +1,7 @@
 import type { Ingredient } from '../../../types';
 import { IngredientListItem } from './IngredientListItem';
 import styles from './IngredientList.module.css';
+import { useState } from 'react';
 
 interface IngredientListProps {
   items: Ingredient[];
@@ -11,11 +12,17 @@ interface IngredientListProps {
 export function IngredientList({ items, onDelete, onEdit }: IngredientListProps) {
   const sorted = [...items].sort((a, b) => a.name.localeCompare(b.name));
 
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+
   return (
     <section className={styles.section}>
-      <h4 id="saved-ingredients-heading">Saved Ingredients</h4>
+      <div className={styles.header}>
+        <h4 id="saved-ingredients-heading">Saved Ingredients</h4>
+        <button onClick={() => setIsCollapsed(!isCollapsed)}> {isCollapsed ? '▼' : '▲'} </button>
+      </div>
 
-      {sorted.length === 0 ? (
+
+      {isCollapsed && (sorted.length === 0 ? (
         <p className={styles.empty}>No ingredients yet. Add one above.</p>
       ) : (
         <ul className={styles.list}>
@@ -28,7 +35,7 @@ export function IngredientList({ items, onDelete, onEdit }: IngredientListProps)
             />
           ))}
         </ul>
-      )}
+      ))}
     </section>
   );
 }

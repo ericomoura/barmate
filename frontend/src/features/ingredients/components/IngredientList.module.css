@@ -3,6 +3,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: var(--space-1) solid white;
+  border-radius: var(--radius-2);
+  padding: var(--space-5);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .empty {
