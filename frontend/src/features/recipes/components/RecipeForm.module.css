@@ -6,7 +6,7 @@
 }
 
 .fieldset {
-  margin: var(--space-6);
+  margin: var(--space-5);
   border-color: white;
   border-radius: var(--radius-1);
 }
