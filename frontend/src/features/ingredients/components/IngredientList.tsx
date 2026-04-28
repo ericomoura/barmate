@@ -1,34 +1,33 @@
-import type { Ingredient, IngredientFormData } from '../../../types';
-import { IngredientListItem } from './IngredientListItem';
-import styles from './IngredientList.module.css';
 import { useState } from 'react';
+import { DEFAULT_ING_DATA, type Ingredient, type IngredientFormData } from '../../../types';
 import { IngredientFormPopup } from './IngredientFormPopup';
+import styles from './IngredientList.module.css';
+import { IngredientListItem } from './IngredientListItem';
 
 interface IngredientListProps {
   items: Ingredient[];
   onDelete: (id: string) => void;
-  onEdit: (id: string, name: string, amount: number, category: string) => void;
   upsertIngredient: (ingData: IngredientFormData) => void;
 }
 
-export function IngredientList({ items, onDelete, onEdit, upsertIngredient }: IngredientListProps) {
+export function IngredientList({ items, onDelete, upsertIngredient }: IngredientListProps) {
   const sorted = [...items].sort((a, b) => a.name.localeCompare(b.name));
 
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
-  const [addPopupIsOpen, setAddPopupIsOpen] = useState<boolean>(false);
+  const [formIng, setFormIng] = useState<IngredientFormData | undefined>(undefined);
 
 
   return (
     <section className={styles.section}>
       <div className={styles.header}>
         <h4 id="saved-ingredients-heading">Saved Ingredients</h4>
-        <button onClick={() => setAddPopupIsOpen(true)}>+</button>
+        <button onClick={() => setFormIng(DEFAULT_ING_DATA)}>+</button>
         <button onClick={() => setIsCollapsed(!isCollapsed)}> {isCollapsed ? '▼' : '▲'} </button>
       </div>
 
-      <IngredientFormPopup 
-        isOpen={addPopupIsOpen} 
-        onClose={() => setAddPopupIsOpen(false)}
+      <IngredientFormPopup
+        ing={formIng}
+        onClose={() => setFormIng(undefined)}
         upsertIngredient={upsertIngredient}
       />
 
@@ -41,7 +40,7 @@ export function IngredientList({ items, onDelete, onEdit, upsertIngredient }: In
               key={ingredient.id}
               ingredient={ingredient}
               onDelete={onDelete}
-              onEdit={onEdit}
+              editIng={setFormIng}
             />
           ))}
         </ul>

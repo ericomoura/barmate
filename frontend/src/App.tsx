@@ -1,29 +1,26 @@
+import styles from './App.module.css'
 import { IngredientForm } from './features/ingredients/components/IngredientForm'
 import { IngredientList } from './features/ingredients/components/IngredientList'
 import { RecipeForm } from './features/recipes/components/RecipeForm'
 import { RecipeList } from './features/recipes/components/RecipeList'
 import { useLocalStorage } from './shared/hooks/useLocalStorage'
 import { KEYS } from './shared/storage/localStorage'
+import utils from './styles/utilities.module.css'
 import type { Ingredient, IngredientFormData, Recipe, RecipeItem } from './types'
-import styles from './App.module.css'
-import utils from './styles/utilities.module.css';
 
 function App() {
   const [ingredients, setIngredients] = useLocalStorage<Ingredient[]>(KEYS.ingredients, []);
   const [recipes, setRecipes] = useLocalStorage<Recipe[]>(KEYS.recipes, []);
 
   function upsertIngredient(ingData: IngredientFormData): void {
-    if (ingData.id) {  // Existing ingredient
-      ingData.name = ingData.name.trim();
-      if (!ingData.name) return;
-
+    if (ingData.id && ingData.name) {  // Existing ingredient
       setIngredients(prev =>
-        prev.map(i => 
-          (i.id === ingData.id ?
-            { ...i, name: ingData.name, amount: ingData.amount, category: ingData.category} 
-            : 
-            i
-          )
+        prev.map(i =>
+        (i.id === ingData.id ?
+          { ...i, name: ingData.name, amount: ingData.amount, category: ingData.category }
+          :
+          i
+        )
         )
       );
     }
@@ -37,13 +34,6 @@ function App() {
   }
   function deleteIngredient(id: string) {
     setIngredients((prev) => prev.filter((i) => i.id !== id));
-  }
-  function editIngredient(id: string, nextName: string, nextAmount: number, nextCategory: string) {
-    const trimmed = nextName.trim();
-    if (!trimmed) return;
-    setIngredients(prev =>
-      prev.map(i => (i.id === id ? { ...i, name: trimmed, amount: nextAmount, category: nextCategory} : i))
-    );
   }
 
   function addRecipe(name: string, items: RecipeItem[]) {
@@ -78,10 +68,9 @@ function App() {
           <section className={styles.leftCol}>
             <h2 id="ingredients-heading">Ingredients</h2>
             <IngredientForm onAdd={addIngredient} />
-            <IngredientList 
-              items={ingredients} 
-              onDelete={deleteIngredient} 
-              onEdit={editIngredient}
+            <IngredientList
+              items={ingredients}
+              onDelete={deleteIngredient}
               upsertIngredient={upsertIngredient}
             />
           </section>

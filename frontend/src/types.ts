@@ -23,3 +23,4 @@ export interface RecipeListFilters {
 }
 
 export type IngredientFormData = Omit<Ingredient, 'id'> & {id?: string};
+export const DEFAULT_ING_DATA: IngredientFormData = { name: '', amount: 0, category: 'Other' };
