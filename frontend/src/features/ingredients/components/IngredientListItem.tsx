@@ -5,7 +5,7 @@ import styles from "./IngredientListItem.module.css";
 interface IngredientListItemProps {
   ingredient: Ingredient;
   onDelete: (id: string) => void;
-  onEdit: (id: string, name: string, amount: number, category?: string) => void;
+  onEdit: (id: string, name: string, amount: number, category: string) => void;
 }
 
 export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: IngredientListItemProps) {
@@ -25,7 +25,7 @@ export function IngredientListItem({ ingredient: ing, onDelete, onEdit }: Ingred
     const trimmed = editName.trim();
     if (!trimmed) return;
     
-    onEdit(editingId!, trimmed, editAmount || 0, editCategory.trim() || undefined);
+    onEdit(editingId!, trimmed, editAmount || 0, editCategory.trim() || 'Other');
     setEditingId(null);
     setEditName('');
     setEditAmount(0);

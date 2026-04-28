@@ -2,7 +2,7 @@ export interface Ingredient {
     readonly id: string;
     name: string;
     amount: number;
-    category?: string;
+    category: string;
 }
 
 export interface RecipeItem {
@@ -21,3 +21,5 @@ export interface RecipeListFilters {
     inStockFruit: boolean;
     inStockOther: boolean;
 }
+
+export type IngredientFormData = Omit<Ingredient, 'id'> & {id?: string};
