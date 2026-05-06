@@ -30,42 +30,45 @@ export function IngredientFormPopup({ onClose, ing, upsertIngredient }: Ingredie
 
 
   return (
-    <dialog className={styles.popup} ref={modalRef} onClose={onClose}>
-      <form onSubmit={submitIng}>
-        <div>
-          <label>Name: </label>
-          <input
-            type="text"
-            value={currentIng.name}
-            onChange={e => setCurrentIng({ ...currentIng, name: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Category: </label>
-          <select
-            value={currentIng.category}
-            onChange={e => setCurrentIng({ ...currentIng, category: e.target.value })}>
-            <option value="Other">Other</option>
-            <option value="Spirit">Spirit</option>
-            <option value="Mixer">Mixer</option>
-            <option value="Fruit">Fruit</option>
-          </select>
-        </div>
-        <div>
-          <label>Amount: </label>
-          <input
-            type="number"
-            value={currentIng.amount}
-            onChange={e => setCurrentIng({ ...currentIng, amount: e.target.valueAsNumber })}
-          />
-          <label> oz.</label>
-        </div>
+    <dialog className={styles.popup} ref={modalRef} onClose={onClose} onClick={(e) => { if (e.target === modalRef.current) onClose(); }}>
+      <fieldset className={styles.fieldset}>
+        <legend>Ingredient</legend>
+        <form onSubmit={submitIng}>
+          <div>
+            <label>Name: </label>
+            <input
+              type="text"
+              value={currentIng.name}
+              onChange={e => setCurrentIng({ ...currentIng, name: e.target.value })}
+            />
+          </div>
+          <div>
+            <label>Category: </label>
+            <select
+              value={currentIng.category}
+              onChange={e => setCurrentIng({ ...currentIng, category: e.target.value })}>
+              <option value="Other">Other</option>
+              <option value="Spirit">Spirit</option>
+              <option value="Mixer">Mixer</option>
+              <option value="Fruit">Fruit</option>
+            </select>
+          </div>
+          <div>
+            <label>Amount: </label>
+            <input
+              type="number"
+              value={currentIng.amount}
+              onChange={e => setCurrentIng({ ...currentIng, amount: e.target.valueAsNumber })}
+            />
+            <label> oz.</label>
+          </div>
 
-        <div className={styles.formButtons}>
-          <button type="submit">Save</button>
-          <button type="button" onClick={onClose}>Cancel</button>
-        </div>
-      </form>
+          <div className={styles.formButtons}>
+            <button type="submit">Save</button>
+            <button type="button" onClick={onClose}>Cancel</button>
+          </div>
+        </form>
+      </fieldset>
     </dialog>
   );
 }

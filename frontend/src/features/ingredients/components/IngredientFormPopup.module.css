@@ -3,7 +3,8 @@ dialog::backdrop {
 }
 
 .popup {
-    border-radius: var(--radius-2);
+    border: none;
+    background: none;
 }
 
 .formButtons {
@@ -11,4 +12,16 @@ dialog::backdrop {
     justify-content: center;
     margin-top: var(--space-3);
     gap: var(--space-2);
+}
+
+.fieldset {
+    border: 2px solid gray; 
+    background-color: var(--color-background);
+    border-radius: var(--radius-1);
+    
+    & legend {
+        margin: 0 auto;
+        font-size: x-large;
+    }
+
 }
