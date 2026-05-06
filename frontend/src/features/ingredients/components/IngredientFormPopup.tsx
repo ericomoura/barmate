@@ -30,18 +30,17 @@ export function IngredientFormPopup({ onClose, ing, upsertIngredient }: Ingredie
 
 
   return (
-    <dialog ref={modalRef} onClose={onClose}>
+    <dialog className={styles.popup} ref={modalRef} onClose={onClose}>
       <form onSubmit={submitIng}>
-        <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+        <div>
           <label>Name: </label>
           <input
             type="text"
             value={currentIng.name}
             onChange={e => setCurrentIng({ ...currentIng, name: e.target.value })}
-            className={styles.input}
           />
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+        <div>
           <label>Category: </label>
           <select
             value={currentIng.category}
@@ -52,22 +51,21 @@ export function IngredientFormPopup({ onClose, ing, upsertIngredient }: Ingredie
             <option value="Fruit">Fruit</option>
           </select>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+        <div>
           <label>Amount: </label>
           <input
             type="number"
             value={currentIng.amount}
             onChange={e => setCurrentIng({ ...currentIng, amount: e.target.valueAsNumber })}
-            className={styles.input}
           />
           <label> oz.</label>
         </div>
 
-        <div className={styles.ingButtons}>
+        <div className={styles.formButtons}>
           <button type="submit">Save</button>
           <button type="button" onClick={onClose}>Cancel</button>
         </div>
       </form>
-    </dialog >
+    </dialog>
   );
 }
