@@ -20,7 +20,7 @@ export function IngredientList({ items, onDelete, upsertIngredient }: Ingredient
   return (
     <section className={styles.section}>
       <div className={styles.header}>
-        <h4 id="saved-ingredients-heading">Saved Ingredients</h4>
+        <h2 id="saved-ingredients-heading">Ingredients</h2>
         <button onClick={() => setFormIng(DEFAULT_ING_DATA)}>+</button>
         <button onClick={() => setIsCollapsed(!isCollapsed)}> {isCollapsed ? '▼' : '▲'} </button>
       </div>

@@ -1,5 +1,4 @@
 import styles from './App.module.css'
-import { IngredientForm } from './features/ingredients/components/IngredientForm'
 import { IngredientList } from './features/ingredients/components/IngredientList'
 import { RecipeForm } from './features/recipes/components/RecipeForm'
 import { RecipeList } from './features/recipes/components/RecipeList'
@@ -29,9 +28,6 @@ function App() {
     }
   }
 
-  function addIngredient(name: string) {
-    setIngredients((prev) => [{ id: crypto.randomUUID(), name, amount: 0, category: 'Other' }, ...prev]);
-  }
   function deleteIngredient(id: string) {
     setIngredients((prev) => prev.filter((i) => i.id !== id));
   }
@@ -66,8 +62,6 @@ function App() {
       <main>
         <div className={styles.layout}>
           <section className={styles.leftCol}>
-            <h2 id="ingredients-heading">Ingredients</h2>
-            <IngredientForm onAdd={addIngredient} />
             <IngredientList
               items={ingredients}
               onDelete={deleteIngredient}
