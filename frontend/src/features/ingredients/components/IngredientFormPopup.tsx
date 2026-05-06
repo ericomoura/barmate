@@ -22,7 +22,8 @@ export function IngredientFormPopup({ onClose, ing, upsertIngredient }: Ingredie
 
   const [currentIng, setCurrentIng] = useState<IngredientFormData>(DEFAULT_ING_DATA);  // Initializes with the current ingredient's fields or defaults if it's a new ingredient
 
-  function submitIng() {
+  function submitIng(e: React.FormEvent) {
+    e.preventDefault();
     upsertIngredient(currentIng);
     onClose();
   }
