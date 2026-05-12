@@ -1,18 +1,20 @@
 import { useState } from 'react';
-import type { Ingredient, Recipe, RecipeItem, RecipeListFilters } from '../../../types';
+import utils from '../../../styles/utilities.module.css';
+import { DEFAULT_RECIPE_DATA, type Ingredient, type Recipe, type RecipeFormData, type RecipeItem, type RecipeListFilters } from '../../../types';
+import { RecipeFormPopup } from './RecipeFormPopup';
 import styles from './RecipeList.module.css';
 import { RecipeListItem } from './RecipeListItem';
-import utils from '../../../styles/utilities.module.css';
 
 interface RecipeListProps {
   items: Recipe[];
   ingredients: Ingredient[];
   onDelete: (id: string) => void;
   onEdit: (id: string, newName: string, newItems: RecipeItem[]) => void;
+  upsertRecipe: (recipe: RecipeFormData) => void;
 }
 
-export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListProps) {
-  function sortRecipes(recipes: Recipe[], criteria: string, ascending: boolean): Recipe[]{
+export function RecipeList({ items, ingredients, onDelete, onEdit, upsertRecipe }: RecipeListProps) {
+  function sortRecipes(recipes: Recipe[], criteria: string, ascending: boolean): Recipe[] {
     var sorted: Recipe[] = recipes;
 
     if (criteria === 'name') {
@@ -30,7 +32,7 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
       return recipe.items.every(item => {
         const ingredient = ingredients.find(ing => ing.id === item.ingredientId);
 
-        if (!ingredient) 
+        if (!ingredient)
           return false;
 
         if (filters.inStockSpirit && ingredient.category === 'Spirit')
@@ -54,48 +56,59 @@ export function RecipeList({ items, ingredients, onDelete, onEdit }: RecipeListP
   const [sortAscending, setSortAscending] = useState<boolean>(true);
   const [filters, setFilters] = useState<RecipeListFilters>({ inStockSpirit: false, inStockMixer: false, inStockFruit: false, inStockOther: false });
   const filteredSortedRecipes = sortRecipes(filterRecipes(items, filters), sortCriteria, sortAscending);
-  
-  
+
+  const [formRecipe, setFormRecipe] = useState<RecipeFormData | undefined>(undefined);
+
+
 
   return (
     <section className={styles.section}>
-      <h4>Saved Recipes</h4>
+      <div>
+        <h4>Saved Recipes</h4>
+        <button onClick={() => setFormRecipe(DEFAULT_RECIPE_DATA)}>+</button>
+        <RecipeFormPopup
+          recipe={formRecipe}
+          ingredients={ingredients}
+          onClose={() => setFormRecipe(undefined)}
+          upsertRecipe={upsertRecipe}
+        />
+      </div>
       <div className={styles.filterSortRow}>
         <div className={styles.sortMenu}>
-            <label>Sort by:</label>
-            <select
-              value={sortCriteria}
-              onChange={e => setSortCriteria(e.target.value)}>
-                <option value="name">Name</option>
-                <option value="ingredients">Ingredients</option>
-                <option value="random">Random</option>
-            </select>
-            <button onClick={() => setSortAscending(!sortAscending)}>{sortAscending ? '↑' : '↓'}</button>
+          <label>Sort by:</label>
+          <select
+            value={sortCriteria}
+            onChange={e => setSortCriteria(e.target.value)}>
+            <option value="name">Name</option>
+            <option value="ingredients">Ingredients</option>
+            <option value="random">Random</option>
+          </select>
+          <button onClick={() => setSortAscending(!sortAscending)}>{sortAscending ? '↑' : '↓'}</button>
         </div>
 
         <div className={utils.vDivider} />
 
         <div>
           <label>In stock: </label>
-          <label><input 
+          <label><input
             type='checkbox'
             checked={filters.inStockSpirit}
-            onChange={e => setFilters(prev => ({...prev, inStockSpirit: e.target.checked}))} />Spirit </label>
-          <label><input 
+            onChange={e => setFilters(prev => ({ ...prev, inStockSpirit: e.target.checked }))} />Spirit </label>
+          <label><input
             type='checkbox'
             checked={filters.inStockMixer}
-            onChange={e => setFilters(prev => ({...prev, inStockMixer: e.target.checked}))} />Mixer </label>
+            onChange={e => setFilters(prev => ({ ...prev, inStockMixer: e.target.checked }))} />Mixer </label>
           <label><input
             type='checkbox'
             checked={filters.inStockFruit}
-            onChange={e => setFilters(prev => ({...prev, inStockFruit: e.target.checked}))} />Fruit </label>
-          <label><input 
+            onChange={e => setFilters(prev => ({ ...prev, inStockFruit: e.target.checked }))} />Fruit </label>
+          <label><input
             type='checkbox'
             checked={filters.inStockOther}
-            onChange={e => setFilters(prev => ({...prev, inStockOther: e.target.checked}))} />Other </label>
+            onChange={e => setFilters(prev => ({ ...prev, inStockOther: e.target.checked }))} />Other </label>
         </div>
       </div>
-      
+
       {filteredSortedRecipes.length === 0 ? (
         <p className={styles.empty}>No recipes available.</p>
       ) : (<>

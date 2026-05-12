@@ -5,7 +5,7 @@ import { RecipeList } from './features/recipes/components/RecipeList'
 import { useLocalStorage } from './shared/hooks/useLocalStorage'
 import { KEYS } from './shared/storage/localStorage'
 import utils from './styles/utilities.module.css'
-import type { Ingredient, IngredientFormData, Recipe, RecipeItem } from './types'
+import type { Ingredient, IngredientFormData, Recipe, RecipeFormData, RecipeItem } from './types'
 
 function App() {
   const [ingredients, setIngredients] = useLocalStorage<Ingredient[]>(KEYS.ingredients, []);
@@ -30,6 +30,23 @@ function App() {
 
   function deleteIngredient(id: string) {
     setIngredients((prev) => prev.filter((i) => i.id !== id));
+  }
+
+  function upsertRecipe(recipeData: RecipeFormData): void {
+    if (recipeData.id && recipeData.name) {  // Existing recipe
+      setRecipes(prev =>
+        prev.map(r =>
+        (r.id === recipeData.id ?
+          { ...r, name: recipeData.name, items: recipeData.items }
+          :
+          r
+        )
+        )
+      );
+    }
+    else {  // New recipe
+      setRecipes((prev) => [{ id: crypto.randomUUID(), name: recipeData.name, items: recipeData.items }, ...prev]);
+    }
   }
 
   function addRecipe(name: string, items: RecipeItem[]) {
@@ -74,7 +91,7 @@ function App() {
           <section className={styles.rightCol}>
             <h2 id="recipes-heading">Recipes</h2>
             <RecipeForm ingredients={ingredients} onAdd={({ name, items }) => addRecipe(name, items)} />
-            <RecipeList items={recipes} ingredients={ingredients} onDelete={deleteRecipe} onEdit={editRecipe} />
+            <RecipeList items={recipes} ingredients={ingredients} onDelete={deleteRecipe} onEdit={editRecipe} upsertRecipe={upsertRecipe} />
           </section>
 
         </div>
