@@ -9,3 +9,5 @@ This is a file of things that I thought of doing in no particular order of impor
     - Refactor recipes list to be card-based and collapsible for better mobile navigation
 
 # Activities
+
+    - Code cleanup/review after finishing recipe form popup
