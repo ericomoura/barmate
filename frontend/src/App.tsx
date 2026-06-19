@@ -68,6 +68,16 @@ function App() {
     );
   }
 
+  function exportJson(data: unknown, filename: string) {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
 
 
   return (
@@ -96,6 +106,11 @@ function App() {
 
         </div>
       </main>
+      <footer className={styles.footer}>
+        <a href="#" onClick={e => { e.preventDefault(); exportJson(ingredients, 'ingredients.json'); }}>Export ingredients</a>
+        {' | '}
+        <a href="#" onClick={e => { e.preventDefault(); exportJson(recipes, 'recipes.json'); }}>Export recipes</a>
+      </footer>
     </>
   );
 }
