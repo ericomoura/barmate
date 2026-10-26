@@ -78,6 +78,28 @@ function App() {
     URL.revokeObjectURL(url);
   }
 
+  function importJson<T>(onLoaded: (data: T) => void) {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(e.target?.result as string) as T;
+          if (!Array.isArray(parsed)) throw new Error('Expected an array');
+          onLoaded(parsed);
+        } catch {
+          alert('Invalid file — make sure you select the correct JSON export file.');
+        }
+      };
+      reader.readAsText(file);
+    };
+    input.click();
+  }
+
 
 
   return (
@@ -109,7 +131,11 @@ function App() {
       <footer className={styles.footer}>
         <a href="#" onClick={e => { e.preventDefault(); exportJson(ingredients, 'ingredients.json'); }}>Export ingredients</a>
         {' | '}
+        <a href="#" onClick={e => { e.preventDefault(); importJson<Ingredient[]>(setIngredients); }}>Import ingredients</a>
+        {' | '}
         <a href="#" onClick={e => { e.preventDefault(); exportJson(recipes, 'recipes.json'); }}>Export recipes</a>
+        {' | '}
+        <a href="#" onClick={e => { e.preventDefault(); importJson<Recipe[]>(setRecipes); }}>Import recipes</a>
       </footer>
     </>
   );
